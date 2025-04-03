@@ -3,7 +3,7 @@ import json
 import streamlit as st
 import pandas as pd
 from dotenv import load_dotenv
-from google import genai
+import google.generativeai as genai
 
 from components.chatbot import FootballChatbot
 from components.analysis_tool import FootballAnalysisTool
