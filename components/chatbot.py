@@ -2,8 +2,7 @@ import streamlit as st
 import google.generativeai as genai
 
 class FootballChatbot:
-    def __init__(self, client, data, memory):
-        self.client = client
+    def __init__(self, data, memory):
         self.data = data
         self.memory = memory
     
@@ -58,9 +57,10 @@ class FootballChatbot:
         full_prompt = f"{system_prompt}\n\n{analysis_context}\n{memory_context}\n{chat_history}\n\nUser query: {prompt}"
         
         try:
-            response = self.client.models.generate_content(
+            # Use genai to generate content
+            response = genai.generate_text(
                 model="gemini-2.0-flash",
-                contents=[{"parts": [{"text": full_prompt}]}]
+                prompt=full_prompt
             )
             return response.text
         except Exception as e:
